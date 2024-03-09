@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 
-
 public class SceneChanger : MonoBehaviour
 {
     public static SceneChanger instance;
+
 
     public void Awake()
     {
@@ -20,17 +20,16 @@ public class SceneChanger : MonoBehaviour
         }
         else DestroyImmediate(gameObject);
     }
-
     private Camera mainCamera;
     private void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded; // ÀÌº¥Æ®¿¡ Ãß°¡
+        SceneManager.sceneLoaded += OnSceneLoaded; // ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½
         
     }
 
     private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded; // ÀÌº¥Æ®¿¡¼­ Á¦°Å*
+        SceneManager.sceneLoaded -= OnSceneLoaded; // ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*
         Debug.Log("OnDestroy");
     }
 
@@ -49,28 +48,28 @@ public class SceneChanger : MonoBehaviour
     }
 
     public CanvasGroup Fade_img;
-    float fadeDuration = 1; //¾ÏÀüµÇ´Â ½Ã°£
+    float fadeDuration = 1; //ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Ã°ï¿½
 
     public void ChangeScene(string sceneName){
         
         Fade_img.DOFade(1, fadeDuration)
         .OnStart(()=>{
-            Fade_img.blocksRaycasts = true; //¾Æ·¡ ·¹ÀÌÄ³½ºÆ® ¸·±â
+            Fade_img.blocksRaycasts = true; //ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         })
         .OnComplete(()=>{
-            StartCoroutine("LoadScene", sceneName); /// ¾À ·Îµå ÄÚ·çÆ¾ ½ÇÇà ///
+            StartCoroutine("LoadScene", sceneName); /// ï¿½ï¿½ ï¿½Îµï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½ ///
         });
     }
 
     public GameObject Loading;
-    public TextMeshProUGUI Loading_text; //ÆÛ¼¾Æ® Ç¥½ÃÇÒ ÅØ½ºÆ®
+    public TextMeshProUGUI Loading_text; //ï¿½Û¼ï¿½Æ® Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
 
     IEnumerator LoadScene(string sceneName)
     {
-        Loading.SetActive(true); //·Îµù È­¸éÀ» ¶ç¿ò
+        Loading.SetActive(true); //ï¿½Îµï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
-        async.allowSceneActivation = false; //ÆÛ¼¾Æ® µô·¹ÀÌ¿ë
+        async.allowSceneActivation = false; //ï¿½Û¼ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ì¿ï¿½
 
         float past_time = 0;
         float percentage = 0;
@@ -87,7 +86,7 @@ public class SceneChanger : MonoBehaviour
 
                 if (percentage == 100)
                 {
-                    async.allowSceneActivation = true; //¾À ÀüÈ¯ ÁØºñ ¿Ï·á
+                    async.allowSceneActivation = true; //ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Øºï¿½ ï¿½Ï·ï¿½
                     Debug.Log("allowSceneActivation = true");
                 }
             }
@@ -96,7 +95,7 @@ public class SceneChanger : MonoBehaviour
                 percentage = Mathf.Lerp(percentage, async.progress * 100f, past_time);
                 if (percentage >= 90) past_time = 0;
             }
-            Loading_text.text = percentage.ToString("0") + "%"; //·Îµù ÆÛ¼¾Æ® Ç¥±â
+            Loading_text.text = percentage.ToString("0") + "%"; //ï¿½Îµï¿½ ï¿½Û¼ï¿½Æ® Ç¥ï¿½ï¿½
         }
     }
 }
