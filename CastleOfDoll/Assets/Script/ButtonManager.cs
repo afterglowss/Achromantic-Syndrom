@@ -33,10 +33,10 @@ public class ButtonManager : MonoBehaviour
                 SceneChanger.instance.ChangeScene("StartScene");
                 break;
             case ButtonType.FadeIn:
-                fade.FadeIn("Noeul", 1);
+                FadeInOut.FadeIn("Noeul", 1);
                 break;
             case ButtonType.FadeInBlur:
-                fade.FadeInBlur("Blur", 1);
+                FadeInOut.FadeInBlur();
                 break;
 
             default:

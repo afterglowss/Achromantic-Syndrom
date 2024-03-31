@@ -7,34 +7,38 @@ using Yarn.Unity;
 
 public class FadeInOut : MonoBehaviour
 {
-
+    public static FadeInOut instance;
+    private static Material blur;
     
     [YarnCommand("fadeIn")]
-    public void FadeIn(string image, float time)
+    public static void FadeIn(string image, float time)
     {
         Image img = GameObject.Find(image).GetComponent<Image>();
         img.DOFade(1, time);
     }
 
     [YarnCommand("fadeOut")]
-    public void FadeOut(string image, float time)
+    public static void FadeOut(string image, float time)
     {
         Image img = GameObject.Find(image).GetComponent<Image>();
         img.DOFade(0, time);
     }
     public void Start()
     {
-        
-    }
-    [YarnCommand("fadeInBlur")]
-    public void FadeInBlur(string image, float time)
-    {
-        Material blur = GameObject.Find(image).GetComponent<Image>().material;
-        //Debug.Log(blur.GetPropertyNames(MaterialPropertyType.Float)[1]);
-        StartCoroutine(FadeInBlurCoroutine(blur));
+        blur = GameObject.Find("Blur").GetComponent<Image>().material;
+        instance = this;
     }
 
-    IEnumerator FadeInBlurCoroutine(Material blur)
+
+
+    [YarnCommand("fadeInBlur")]
+    public static void FadeInBlur()
+    {
+        instance.StartCoroutine(FadeInBlurCoroutine());
+
+    }
+    
+    static IEnumerator FadeInBlurCoroutine()
     {
         float FadeCount = 0;
         while (FadeCount < 2.0f)
@@ -46,18 +50,18 @@ public class FadeInOut : MonoBehaviour
 
     }
     [YarnCommand("fadeOutBlur")]
-    public void FadeOutBlur(string image, float time)
+    public static void FadeOutBlur(string image)
     {
         Material blur = GameObject.Find(image).GetComponent<Image>().material;
-        StartCoroutine(FadeOutBlurCoroutine(blur));
+        instance.StartCoroutine(FadeOutBlurCoroutine(blur));
     }
 
-    IEnumerator FadeOutBlurCoroutine(Material blur)
+    static IEnumerator FadeOutBlurCoroutine(Material blur)
     {
-        float FadeCount = 0;
-        while (FadeCount < 2.0f)
+        float FadeCount = 2;
+        while (FadeCount > 0.02f)
         {
-            FadeCount += 0.02f;
+            FadeCount -= 0.02f;
             yield return new WaitForSeconds(0.0005f);
             blur.SetFloat("_Size", FadeCount);          //메터리얼 프로퍼티 이름을 쓰고 싶다면 앞에 _붙이는 거 잊지마
         }

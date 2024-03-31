@@ -11,6 +11,10 @@ public class SceneChanger : MonoBehaviour
 {
     public static SceneChanger instance;
 
+    public GameObject Loading;
+    public TextMeshProUGUI Loading_text; //퍼센트 표시할 텍스트
+
+
     public void Awake()
     {
         if (instance == null)
@@ -19,12 +23,14 @@ public class SceneChanger : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else DestroyImmediate(gameObject);
+        Loading.SetActive(false);
     }
 
     private Camera mainCamera;
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded; // 이벤트에 추가
+
         
     }
 
@@ -61,9 +67,6 @@ public class SceneChanger : MonoBehaviour
             StartCoroutine("LoadScene", sceneName); /// 씬 로드 코루틴 실행 ///
         });
     }
-
-    public GameObject Loading;
-    public TextMeshProUGUI Loading_text; //퍼센트 표시할 텍스트
 
     IEnumerator LoadScene(string sceneName)
     {
