@@ -1,0 +1,46 @@
+﻿title: LeoPhoneChat
+tags:
+---
+<<if $LeoPhoneChat1 == false>>
+    <<set $LeoPhoneChat1 = true>>
+<<else>>
+    <<stop>>
+<<endif>>
+
+//메시지의 내용
+<<Them>>
+17.05.2067 PM5:16
+안녕하세요. 닥터.
+<<wait 1>>
+오늘 저녁에 볼 수 있을까요?
+<<wait 1>>
+이번엔 좀 심각한 이야기에요.
+
+
+<<basicDialogue Monologue1>>
+===
+title: LeoPhoneChat2
+tags:
+---
+<<Me>>
+17.05.2067. PM5:17
+시간 있어.
+<<wait 1>>
+오늘은 어디야?
+<<wait 1>>
+
+<<Them>>
+17.05.2067. PM5:17
+앞이죠.
+<<wait 2>>
+<<basicDialogue Meeting>>
+===
+
+
+title: Monologue1
+---
+닥터: 흠.
+닥터: 이번엔 또 무슨 쓸데없는 일일까. (희미한 미소)
+닥터: 진짜 심각한 일은 아니었으면 좋겠네.
+<<leoDialogue LeoPhoneChat2>>
+===

@@ -9,6 +9,7 @@ public enum ButtonType
     Back,
     FadeIn,
     FadeInBlur,
+    Message,
 }
 
 
@@ -18,9 +19,14 @@ public class ButtonManager : MonoBehaviour
 
     private FadeInOut fade;
 
+    
     private void Start()
     {
         fade = GetComponent<FadeInOut>();
+    }
+    public void Awake()
+    {
+        
     }
     public void OnButtonClick()
     {
@@ -33,10 +39,14 @@ public class ButtonManager : MonoBehaviour
                 SceneChanger.instance.ChangeScene("StartScene");
                 break;
             case ButtonType.FadeIn:
-                FadeInOut.FadeIn("Noeul", 1);
+                FadeInOut.FadeIn("Doctor", 1);
                 break;
             case ButtonType.FadeInBlur:
                 FadeInOut.FadeInBlur();
+                break;
+
+            case ButtonType.Message:
+                MessageController.MessageOnOff();
                 break;
 
             default:
@@ -45,5 +55,7 @@ public class ButtonManager : MonoBehaviour
 
 
     }
+
+    
     
 }

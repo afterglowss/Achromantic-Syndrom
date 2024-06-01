@@ -25,8 +25,23 @@ public class FadeInOut : MonoBehaviour
     }
     public void Start()
     {
-        blur = GameObject.Find("Blur").GetComponent<Image>().material;
+        //blur = GameObject.Find("Blur").GetComponent<Image>().material;
         instance = this;
+    }
+
+    [YarnCommand("fadeInSprite")]
+    public static void FadeInSprite(string sprite, float time)
+    {
+        SpriteRenderer spriteRenderer = GameObject.Find(sprite).GetComponent<SpriteRenderer>();
+        spriteRenderer.DOFade(1, time);
+
+    }
+    [YarnCommand("fadeOutSprite")]
+    public static void FadeIOutSprite(string sprite, float time)
+    {
+        SpriteRenderer spriteRenderer = GameObject.Find(sprite).GetComponent<SpriteRenderer>();
+        spriteRenderer.DOFade(0, time);
+
     }
 
 

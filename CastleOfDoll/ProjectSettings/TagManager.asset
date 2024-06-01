@@ -53,6 +53,9 @@ TagManager:
   - name: Dialogue
     uniqueID: 2640909135
     locked: 0
+  - name: Option
+    uniqueID: 2741133587
+    locked: 0
   - name: SceneChanger
     uniqueID: 2528554679
     locked: 0

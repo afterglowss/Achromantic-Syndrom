@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      silhouette-144967_1920_0: 69141645420169320
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
